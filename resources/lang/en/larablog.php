@@ -33,7 +33,7 @@ return [
     ],
 
     'home' => [
-        'title'         => 'Welcome to Larablog',
+        'title'         => 'Welcome to Sodahotga\'s blog',
         'description'   => 'Larablog is an open source blog built on Laravel and Bootstrap',
     ],
 
