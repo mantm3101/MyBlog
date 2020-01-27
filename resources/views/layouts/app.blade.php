@@ -1,56 +1,63 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        @if(config('blog.services.googleAnalyticsID'))
-            @include('blog.partials.analytics')
-        @endif
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        {{-- CSRF Token --}}
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>@if (trim($__env->yieldContent('template_title')))@yield('template_title') | @endif {{ config('app.name', trans('titles.app')) }}</title>
-        @if (trim($__env->yieldContent('template_description')))
-            <meta name="description" content="@yield('template_description')">
-        @endif
-        <meta name="author" content="{{ config('blog.author') }}">
-        <link rel="shortcut icon" href="/favicon.ico">
+<head>
+    <meta charset="utf-8">
+    @if(config('blog.services.googleAnalyticsID'))
+    @include('blog.partials.analytics')
+    @endif
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        {{-- Dynamic RSS Feed Calls --}}
-        @include('feed::links')
+    {{-- CSRF Token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@if (trim($__env->yieldContent('template_title')))@yield('template_title') | @endif {{ config('app.name', trans('titles.app')) }}</title>
+    @if (trim($__env->yieldContent('template_description')))
+    <meta name="description" content="@yield('template_description')">
+    @endif
+    <meta name="author" content="{{ config('blog.author') }}">
+    <link rel="shortcut icon" href="/favicon.ico">
 
-        {{-- Fonts --}}
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    {{-- Dynamic RSS Feed Calls --}}
+    @include('feed::links')
 
-        {{-- Styles --}}
-        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-        @if($theme)
-            <link rel="stylesheet" type="text/css" href="{{ $theme->link }}">
-        @endif
+    {{-- Fonts --}}
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-        {{-- Scripts --}}
-        <script>
-            window.Laravel = {!! json_encode([
+    {{-- Styles --}}
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @if($theme)
+    <link rel="stylesheet" type="text/css" href="{{ $theme->link }}">
+    @endif
+
+    {{-- Scripts --}}
+    <script>
+        window.Laravel = {
+            !!json_encode([
                 'csrfToken' => csrf_token(),
-            ]) !!};
-        </script>
+            ]) !!
+        };
+    </script>
 
-        @stack('head')
-    </head>
-    <body>
-        <div id="app">
-            @include('blog.partials.nav')
-            <main>
-                @yield('content')
-            </main>
-           @include('blog.partials.footer')
-        </div>
+    @stack('head')
+</head>
 
-        {{-- Scripts --}}
-        <script src="{{ mix('js/app.js') }}" defer></script>
-        @stack('scripts')
-    </body>
+<body>
+    <div id="app">
+        @include('blog.partials.nav')
+        <main>
+            @yield('content')
+        </main>
+        <div id="fb-root"></div>
+        @include('blog.partials.footer')
+    </div>
+
+    {{-- Scripts --}}
+    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=214004312973702&autoLogAppEvents=1"></script>
+    @stack('scripts')
+</body>
+
 </html>
