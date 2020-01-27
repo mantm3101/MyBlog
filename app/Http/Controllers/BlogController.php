@@ -57,7 +57,6 @@ class BlogController extends Controller
         }
 
         $data = compact('post', 'tag', 'slug');
-
         return view($post->layout, $data);
     }
 

@@ -41,3 +41,15 @@ function post_image($value = null)
 
     return $value;
 }
+
+/**
+ * Return DD-MM-YYYY HH:mm:ss date format
+ */
+
+function format_normal_date($value = null)
+{
+    if (!empty($value)) {
+        return date('d-m-Y H:m:s', strtotime($value));
+    }
+    return '';
+}
